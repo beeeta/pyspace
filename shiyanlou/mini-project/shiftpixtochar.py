@@ -19,7 +19,7 @@ if __name__=='__main__':
     parse.add_argument('--width',type=int,default=80)
     args = parse.parse_args()
     filepath = args.file
-    outfile = args.outfile
+    outfile = args.outfile	
     height = args.height
     width = args.width
     file = Image.open(filepath)
@@ -28,7 +28,12 @@ if __name__=='__main__':
     txt = ""
     for i in range(height):
         for j in range(width):
-            char = parse_char(*file.getpixel((j,i)))
+            # if the picture is black-white : file.getpixel() return int
+            pix = file.getpixel((j,i))
+            if type(pix) is tuple: 
+                char = parse_char(*pix)
+            else:
+                char = ascii_char[pix]
             txt += char 
         txt +=" \n"
         
