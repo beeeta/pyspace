@@ -1,3 +1,7 @@
+"""
+查看糗事百科热点内容，分页显示
+
+"""
 
 import requests
 import re
