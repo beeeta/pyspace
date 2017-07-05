@@ -1,6 +1,6 @@
 import requests
 from pyquery import PyQuery as pq
-import datetime
+import time
 
 base_url = 'https://tieba.baidu.com/p/{}?see_lz={}'
 
@@ -48,7 +48,7 @@ class BDZD(object):
         print('总页数为：{}'.format(self.totalPage))
         for i in range(int(self.totalPage)):
             self.geneCurrentPage()
-            self.saveToFile(str(self.topicId)+'_' + datetime.datetime.now + '.txt')
+            self.saveToFile(str(self.topicId)+'_' + time.strftime('%Y-%m-%d')+ '.txt')
             self.currentPageNum += 1
         
     
