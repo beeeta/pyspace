@@ -16,7 +16,6 @@ class CacheDict(dict):
     def __setitem__(self,key,value):
         dict.__setitem__(self,key,value)
         if len(self) > self._length:
-            #print((list(self.keys()))[0])
             self.pop(list(self.keys())[0])
             
             
@@ -45,14 +44,22 @@ class QSBK(object):
     
     
     def formatPrint(self,items):
+        def tripString(src,width=23):
+            index = 1
+            while index*width<len(src):
+                src = src[:index*width]+ '\n' + src[index*width:]
+                index += 1
+            return src  
+        
         for item in items:
             print('=============================================\n')
-            print(item['content'])
+            print(tripString(item['content'].replace(' ','')))
             print('\n')
             print('stars:{}'.format(item['stars']))
             print('\n')
         print('press enter to next page\n')
-    
+        
+          
         
 def main():
     qsbk = QSBK()
@@ -62,10 +69,12 @@ def main():
         items = qsbk.getPageCode(index)
         qsbk.formatPrint(items)
         key = input()
-        if key.upper() != 'Q':
-            index += 1
-        else:
+        if key.upper() == 'Q':
             shift = False
+        elif key.upper()=='R':
+            index = 1
+        else:
+            index += 1
         
             
             
